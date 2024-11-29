@@ -1,5 +1,4 @@
 ﻿using System;
-using AdventOfCode2024.Utilities;
 
 namespace AdventOfCode2024.Solutions
 {
