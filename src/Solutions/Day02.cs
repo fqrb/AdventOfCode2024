@@ -19,13 +19,11 @@ namespace AdventOfCode2024.Solutions
         {
             bool isAscending = levels[0] < levels[1];
 
-            bool isValid = levels
+            return levels
                 .Take(levels.Count - 1)
                 .Select((val, i) => levels[i + 1] - val)
                 .All(difference => isAscending && difference is > 0 and <= 3
-                                    || (!isAscending && difference is < 0 and >= -3));
-
-            return isValid ? 1 : 0;
+                                   || (!isAscending && difference is < 0 and >= -3)) ? 1 : 0;
         }
 
         public void RunPart2(string input)
