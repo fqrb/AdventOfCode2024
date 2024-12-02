@@ -9,8 +9,8 @@ namespace AdventOfCode2024.Solutions
     {
         public void RunPart1(string input)
         {
-            string[] lines = HelperFunctions.SplitLines(input);
-            Console.WriteLine(lines
+            Console.WriteLine(HelperFunctions
+                .SplitLines(input)
                 .Select(line => line.Split(' ').Select(int.Parse).ToList())
                 .Sum(ParseLevel));
         }
@@ -30,30 +30,22 @@ namespace AdventOfCode2024.Solutions
 
         public void RunPart2(string input)
         {
-            string[] lines = HelperFunctions.SplitLines(input);
-            Console.WriteLine(lines
+            Console.WriteLine(HelperFunctions
+                .SplitLines(input)
                 .Select(line => line.Split(' ').Select(int.Parse).ToList())
                 .Sum(ParseLevelWithDampener));
         }
 
         private static int ParseLevelWithDampener(List<int> levels)
         {
-            if (ParseLevel(levels) == 1)
-            {
-                return 1;
-            }
+            if (ParseLevel(levels) == 1) return 1;
 
-            for (int i = 0; i < levels.Count; i++)
-            {
-                List<int> newLevels = [.. levels];
-                newLevels.RemoveAt(i);
-
-                bool isValid = ParseLevel(newLevels) == 1;
-
-                if (isValid) return 1;
-            }
-
-            return 0;
+            return levels
+                .Select((t, i) =>
+                    levels
+                        .Where((_, j) => j != i)
+                        .ToList())
+                .Any(smallerLevel => ParseLevel(smallerLevel) == 1) ? 1 : 0;
         }
     }
 }
