@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using AdventOfCode2024.Solutions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode2024
 {
@@ -55,6 +51,7 @@ namespace AdventOfCode2024
                 Console.WriteLine("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                 Console.WriteLine();
                 solutionFile.RunPart2(input);
+                Console.ReadLine();
             }
             catch (Exception ex)
             {

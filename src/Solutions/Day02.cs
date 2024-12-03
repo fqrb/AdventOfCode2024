@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 
 namespace AdventOfCode2024.Solutions
 {
@@ -39,7 +38,7 @@ namespace AdventOfCode2024.Solutions
             if (ParseLevel(levels) == 1) return 1;
 
             return levels
-                .Select((t, i) =>
+                .Select((_, i) =>
                     levels
                         .Where((_, j) => j != i)
                         .ToList())

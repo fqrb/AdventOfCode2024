@@ -36,7 +36,7 @@ namespace AdventOfCode2024.Solutions
             foreach (string s in splitInput)
             {
                 // Then for every line in the array we split it into two integers and add them to the lists
-                string[] ss = s.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] ss = s.Split([' '], StringSplitOptions.RemoveEmptyEntries);
                 l.Add(int.Parse(ss[0]));
                 r.Add(int.Parse(ss[1]));
             }
