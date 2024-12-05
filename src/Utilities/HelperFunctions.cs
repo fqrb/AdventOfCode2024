@@ -6,7 +6,7 @@ namespace AdventOfCode2024.Utilities
     {
         public static string[] SplitLines(string input)
         {
-            return input.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            return input.Split(['\n'], StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }
