@@ -52,6 +52,7 @@
     <Compile Include="src\Solutions\Day03.cs" />
     <Compile Include="src\Solutions\Day04.cs" />
     <Compile Include="src\Solutions\Day05.cs" />
+    <Compile Include="src\Solutions\Day06.cs" />
     <Compile Include="src\Solutions\ISolution.cs" />
     <Compile Include="src\Utilities\HelperFunctions.cs" />
   </ItemGroup>
@@ -65,6 +66,7 @@
     <Content Include="src\Inputs\Day03.txt" />
     <Content Include="src\Inputs\Day04.txt" />
     <Content Include="src\Inputs\Day05.txt" />
+    <Content Include="src\Inputs\Day06.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
