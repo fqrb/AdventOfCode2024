@@ -117,7 +117,46 @@ namespace AdventOfCode2024.Solutions
 
         public void RunPart2(string input)
         {
-            throw new System.NotImplementedException();
+            string[] lines = HelperFunctions.SplitLines(input);
+            char[][] grid = lines.Select(s => s.ToCharArray()).ToArray();
+
+            int loopsCreated = 0;
+
+            for (int y = 0; y < grid.Length; y++)
+            {
+                for (int x = 0; x < grid[0].Length; x++)
+                {
+                    HashSet<((int, int), Orientation)> visited = [];
+                    (int, int) currentPosition = GetGuardPosition(grid);
+                    Orientation currentOrientation = Orientation.North;
+
+                    while (true)
+                    {
+                        // If the element is already in the hashset we have already been there, and thus we have created a loop.
+                        if (!visited.Add((currentPosition, currentOrientation))) 
+                        {
+                            loopsCreated++;
+                            break;
+                        }
+
+                        (int, int) newPosition = GetNewPosition(currentPosition, currentOrientation);
+
+                        if (!IsInBounds(newPosition, grid))
+                            break;
+
+                        if (IsObstacle(newPosition, grid) || newPosition == (x, y))
+                        {
+                            currentOrientation = TurnRight(currentOrientation);
+                        }
+                        else
+                        {
+                            currentPosition = newPosition;
+                        }
+                    }
+                }
+            }
+            
+            Console.WriteLine(loopsCreated);
         }
     }
 }
