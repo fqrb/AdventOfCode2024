@@ -27,7 +27,7 @@ namespace AdventOfCode2024.Solutions
                     index = i;
                     break;
                 }
-
+                
                 int[] pageRule = line.Split('|').Select(int.Parse).ToArray();
                 pageOrderingRules.Add((pageRule[0], pageRule[1]));
             }
