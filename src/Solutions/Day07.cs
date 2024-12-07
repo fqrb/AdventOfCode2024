@@ -14,42 +14,62 @@ namespace AdventOfCode2024.Solutions
 
             foreach (string line in lines)
             {
-                total += (ulong)CheckIfValid(line);
+                total += CheckIfValid(line, GetSuccessorsPart1);
             }
             Console.WriteLine(total);
         }
 
-        private static int CheckIfValid(string s)
+        private static ulong CheckIfValid(string s, Func<ulong, ulong, IEnumerable<ulong>> getSuccessors)
         {
             string[] parts = s.Split(':');
-
             ulong answer = ulong.Parse(parts[0]);
-
             ulong[] numbers = parts[1].TrimStart(' ').Split(' ').Select(ulong.Parse).ToArray();
 
-            HashSet<ulong> results = [numbers[0]];
-            for (int i = 1; i < numbers.Length; i++)
+            Queue<(int index, ulong value)> queue = new();
+            queue.Enqueue((index: 0, value: numbers[0]));
+
+            while (queue.Count > 0)
             {
-                ulong currentNumber = numbers[i];
+                (int i, ulong value) = queue.Dequeue();
 
-                HashSet<ulong> newIntermediateResults = [];
-                foreach (ulong number in results)
+                if (i == numbers.Length - 1)
                 {
-                    if (currentNumber <= ulong.MaxValue / number)
-                        newIntermediateResults.Add(number * currentNumber);
+                    if (value == answer)
+                    {
+                        return answer;
+                    }
 
-                    if (currentNumber <= ulong.MaxValue - number)
-                        newIntermediateResults.Add(number + currentNumber);
-
-                    results = newIntermediateResults;
+                    continue;
                 }
-            }
 
-            return results.Contains(answer) ? (int)answer : 0;
+                getSuccessors(value, numbers[i + 1])
+                    .ToList()
+                    .ForEach(successor => queue.Enqueue((i + 1, successor)));
+            }
+            return 0;
+        }
+
+        private static ulong[] GetSuccessorsPart1(ulong value, ulong nextNumber)
+        {
+            return [value * nextNumber, value + nextNumber];
         }
 
         public void RunPart2(string input)
         {
+            string[] lines = HelperFunctions.SplitLines(input);
+
+            ulong total = 0;
+
+            foreach (string line in lines)
+            {
+                total += CheckIfValid(line, GetSuccessorsPart2);
+            }
+            Console.WriteLine(total);
+        }
+
+        private static ulong[] GetSuccessorsPart2(ulong value, ulong nextNumber)
+        {
+            return [value * nextNumber, value + nextNumber, ulong.Parse(value.ToString() + nextNumber)];
         }
     }
 }
