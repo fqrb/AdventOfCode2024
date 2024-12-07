@@ -19,7 +19,7 @@ namespace AdventOfCode2024.Solutions
             Console.WriteLine(total);
         }
 
-        private static ulong CheckIfValid(string s, Func<ulong, ulong, IEnumerable<ulong>> getSuccessors)
+        private static ulong CheckIfValid(string s, Func<ulong, ulong, ulong[]> getSuccessors)
         {
             string[] parts = s.Split(':');
             ulong answer = ulong.Parse(parts[0]);
